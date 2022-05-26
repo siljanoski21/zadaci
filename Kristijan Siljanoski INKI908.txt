@@ -1,0 +1,59 @@
+#include <iostream>
+#include <map>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+// utility comparator function to pass to the sort() module
+	 bool sortByVal(const pair<string, int> &a,
+					const pair<string, int> &b)
+	{
+		return (a.second < b.second);
+	}
+
+int main(){
+//kreiranje na mapa
+	map<string,int> mapa ={{"Skopje",549},{"Bitola",49},{"Kumanovo",40},{"Kavadarci",25},{"Ohrid",20},{"Strumica",17},{"Prilep",16},{"Stip",11},{"Struga",10},{"Gostivar",9}};
+	int num = 0;
+	int in = 0;
+	int siz = 0;
+	string str;
+	//prazen vektor so parovi
+	vector<pair<string, int>> vektor;
+
+        cout<<"Mapa na zarazeni po gradovi: "<<endl;
+        for (auto i : mapa){
+		std::cout << '{' << i.first << ", "
+				<< i.second << "}\n";
+        }
+        	// copy key-value pair  od  map vo  vecto
+		map<string, int> :: iterator it;
+		for (it=mapa.begin(); it!=mapa.end(); it++)
+		{
+			vektor.push_back(make_pair(it->first, it->second));
+		} 
+		// podredi go vektorot spored zgolemuvanje na redot na vtorata vrednost 
+		sort(vektor.begin(), vektor.end(), sortByVal);
+		siz = vektor.size();
+		cout << "\nMapata sortirana do najgolema vrednost: " << endl;
+		//se pecati vektorot
+		for (int i = 0; i < siz; ++i)
+		{
+
+			cout << vektor[i].first << ": " << vektor[i].second << endl;
+		}
+
+			cout<<"Vnesete indeks INKI/IKT: ";
+			cin>>str;
+			cout<<"Vnesete indeks BROJ: ";
+			cin>>in;
+			mapa.insert(pair<string, int>(str, in));
+
+            cout<<"Vnesete ime: ";
+			cin>>str;
+			cout<<"Vnesete datum: ";
+			cin>>str;
+			mapa.insert(pair<string, int>(str, in));
+
+			 return 0;
+}
